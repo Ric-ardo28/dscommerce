@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -41,5 +43,15 @@ public class OrderItem {
 		id.setOrder(order);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		OrderItem orderItem = (OrderItem) o;
+		return Objects.equals(id, orderItem.id);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
+	}
 }
