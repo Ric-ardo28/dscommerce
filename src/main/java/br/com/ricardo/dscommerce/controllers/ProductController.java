@@ -10,6 +10,6 @@ public class ProductController {
 
 	@GetMapping
 	public String teste() {
-		return "helo world teste";
+		return "hello world teste";
 	}
 }
