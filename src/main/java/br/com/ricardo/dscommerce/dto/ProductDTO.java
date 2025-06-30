@@ -1,7 +1,9 @@
 package br.com.ricardo.dscommerce.dto;
 
 import br.com.ricardo.dscommerce.entities.Product;
+import lombok.Getter;
 
+@Getter
 public class ProductDTO {
 	private Long id;
 	private String name;
@@ -28,23 +30,4 @@ public class ProductDTO {
 	public ProductDTO() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
 }
