@@ -1,5 +1,7 @@
 package br.com.ricardo.dscommerce.dto;
 
+import br.com.ricardo.dscommerce.entities.Product;
+
 public class ProductDTO {
 	private Long id;
 	private String name;
@@ -14,6 +16,14 @@ public class ProductDTO {
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
+	public ProductDTO(Product entity) {
+		id = entity.getId();
+		name = entity.getName();
+		description = entity.getDescription();
+		price = entity.getPrice();
+		imgUrl = entity.getImgUrl();
+	}
+
 
 	public ProductDTO() {
 	}
