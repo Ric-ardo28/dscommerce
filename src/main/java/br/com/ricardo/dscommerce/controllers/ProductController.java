@@ -5,9 +5,12 @@ import br.com.ricardo.dscommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -30,18 +33,19 @@ Evitar exceção caso o ID não exista:
 
  */
 	@GetMapping(value = "/{id}")
-	public ProductDTO findById(@PathVariable Long id) {
+	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
 
-		return service.findById(id);
+		return ResponseEntity.ok(service.findById(id));
 	}
 	@GetMapping
-	public Page<ProductDTO> findAll(Pageable pageable) {
+	public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
 
-		return service.findAll(pageable);
+		return ResponseEntity.ok(service.findAll(pageable));
 	}
 	@PostMapping
-	public ProductDTO insert(@RequestBody ProductDTO dto) {
-
-		return service.insert(dto);
+	public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(service.insert(dto).getId()).toUri();
+		return ResponseEntity.created(uri).body(service.insert(dto));
 	}
 }
