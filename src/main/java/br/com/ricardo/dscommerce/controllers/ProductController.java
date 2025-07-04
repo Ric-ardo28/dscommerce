@@ -44,8 +44,15 @@ Evitar exceção caso o ID não exista:
 	}
 	@PostMapping
 	public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(service.insert(dto).getId()).toUri();
-		return ResponseEntity.created(uri).body(service.insert(dto));
+				.buildAndExpand(dto.getId()).toUri();
+		// A URI é o endereço do recurso recém-criado
+		return ResponseEntity.created(uri).body(dto);
+	}
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+
+		return ResponseEntity.ok(service.update(id, dto));
 	}
 }
