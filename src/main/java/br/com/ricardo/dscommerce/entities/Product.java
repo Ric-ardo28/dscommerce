@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Setter
 @Getter
-
 @Entity
 @Table(name = "tb_product")
 public class Product {
