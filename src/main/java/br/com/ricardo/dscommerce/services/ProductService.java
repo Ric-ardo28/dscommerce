@@ -4,10 +4,14 @@ import br.com.ricardo.dscommerce.dto.ProductDTO;
 import br.com.ricardo.dscommerce.entities.Product;
 import br.com.ricardo.dscommerce.repository.ProductRepository;
 
+import br.com.ricardo.dscommerce.services.exceptions.DatabaseException;
 import br.com.ricardo.dscommerce.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -48,21 +52,30 @@ public class ProductService {
 
 	@Transactional
 	public ProductDTO update(Long id,ProductDTO dto) {
-		Product entity = repository.getReferenceById(id);
+		try{
+			Product entity = repository.getReferenceById(id);
 
-		copyDtoToEntity(dto, entity);
+			copyDtoToEntity(dto, entity);
 
-		entity = repository.save(entity);
+			entity = repository.save(entity);
 
-		return new ProductDTO(entity);
+			return new ProductDTO(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Recurso não encontrado");
+		}
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.SUPPORTS )
 	public void delete(Long id) {
-		repository.deleteById(id);
-
-
-	}
+		if (!repository.existsById(id)) {
+			throw new ResourceNotFoundException("Recurso não encontrado");
+		}
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Falha na integridade referencial");
+		}
+		}
 
 	private void copyDtoToEntity(ProductDTO dto, Product entity) {
 		entity.setName(dto.getName());
