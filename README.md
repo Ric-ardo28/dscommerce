@@ -1,73 +1,95 @@
 # DSCommerce
 
 Projeto de e-commerce desenvolvido durante o curso da
-**[DevSuperior - Escola de Programacao](https://devsuperior.com.br)**,
-ministrado pelo professor **Nelio Alves**.
+**[DevSuperior - Escola de Programação](https://devsuperior.com.br)**,
+ministrado pelo professor **Nélio Alves**.
 
-O projeto tem fins educacionais e faz parte do meu aprendizado em
-**Java**, **Spring Boot** e desenvolvimento de APIs REST para aplicacoes
-back-end.
+O projeto tem fins educacionais e faz parte da minha jornada de aprendizado em
+**Java**, **Spring Boot**, **JPA/Hibernate** e desenvolvimento de **APIs REST**
+para aplicações back-end.
 
-> Status: projeto em fase inicial de desenvolvimento.
+> Status: projeto em desenvolvimento, acompanhando a evolução das aulas do curso.
+
+---
 
 ## Sobre o projeto
 
-O **DSCommerce** simula uma loja virtual e sera construido gradualmente com
-funcionalidades comuns a sistemas de e-commerce, como catalogo de produtos,
-carrinho de compras, pedidos, usuarios e controle de acesso.
+O **DSCommerce** simula uma aplicação de e-commerce, com o objetivo de praticar
+conceitos utilizados em sistemas reais, como cadastro de produtos, categorias,
+usuários, pedidos, pagamentos e controle de acesso.
 
-Durante o desenvolvimento, serao praticados conceitos como:
+Durante o desenvolvimento do projeto, serão trabalhados conceitos como:
 
-- criacao de APIs REST;
+- criação de APIs REST com Spring Boot;
 - arquitetura em camadas;
-- entidades e relacionamentos;
-- persistencia em banco de dados;
-- operacoes CRUD;
-- validacao de dados;
-- tratamento de excecoes;
-- autenticacao e autorizacao;
-- perfis de acesso.
+- modelagem de domínio;
+- mapeamento objeto-relacional com JPA/Hibernate;
+- relacionamentos entre entidades;
+- persistência em banco de dados;
+- operações CRUD;
+- tratamento de exceções;
+- validação de dados;
+- autenticação e autorização;
+- perfis de acesso de usuários.
+
+---
 
 ## Estado atual
 
 Neste momento, o projeto possui:
 
-- estrutura inicial de uma aplicacao Spring Boot;
-- entidade `User` mapeada com JPA;
-- modelo inicial de `Order`;
-- enumeracao `OrderStatus`;
-- perfil de teste configurado;
-- banco de dados H2 em memoria;
-- console web do H2 habilitado.
+- estrutura inicial de uma aplicação Spring Boot;
+- configuração com Maven Wrapper;
+- perfil de teste ativo;
+- banco de dados H2 em memória;
+- console web do H2 habilitado;
+- entidades iniciais mapeadas com JPA;
+- relacionamento entre `Product` e `Category`;
+- relacionamento entre `Order`, `User` e `Payment`.
+
+Entidades já criadas:
+
+- `User`;
+- `Order`;
+- `OrderStatus`;
+- `Category`;
+- `Product`;
+- `Payment`.
+
+---
 
 ## Funcionalidades planejadas
 
-### Publicas
+### Públicas
 
-- consultar o catalogo de produtos;
+- consultar o catálogo de produtos;
 - filtrar produtos por nome;
-- visualizar os detalhes de um produto;
-- gerenciar o carrinho de compras;
+- visualizar detalhes de um produto;
+- gerenciar carrinho de compras;
 - cadastrar-se no sistema;
 - realizar login.
 
 ### Cliente
 
-- atualizar os proprios dados;
+- atualizar os próprios dados;
 - registrar pedidos;
-- visualizar os proprios pedidos.
+- visualizar os próprios pedidos;
+- consultar o histórico de compras.
 
 ### Administrador
 
 - cadastrar, editar, listar e remover produtos;
 - cadastrar, editar, listar e remover categorias;
-- gerenciar usuarios;
+- gerenciar usuários;
 - registrar pagamentos;
-- gerar relatorios de pedidos.
+- consultar pedidos;
+- gerar relatórios de pedidos.
 
-## Modelo de dominio
+---
 
-O modelo de dominio previsto inclui as seguintes entidades:
+## Modelo de domínio
+
+O modelo de domínio previsto para o projeto inclui as seguintes entidades:
 
 - `User`;
 - `Role`;
@@ -77,16 +99,20 @@ O modelo de dominio previsto inclui as seguintes entidades:
 - `OrderItem`;
 - `Payment`.
 
-Os principais relacionamentos planejados sao:
+Principais relacionamentos previstos:
 
-- um produto pode pertencer a varias categorias;
-- uma categoria pode possuir varios produtos;
-- um usuario pode realizar varios pedidos;
-- um pedido pode possuir varios itens;
+- um produto pode pertencer a várias categorias;
+- uma categoria pode possuir vários produtos;
+- um usuário pode realizar vários pedidos;
+- um pedido pertence a um usuário;
+- um pedido pode possuir vários itens;
 - cada item de pedido representa um produto e sua quantidade;
-- um usuario pode possuir um ou mais perfis de acesso.
+- um pedido pode possuir um pagamento;
+- um usuário pode possuir um ou mais perfis de acesso.
 
-## Tecnologias
+---
+
+## Tecnologias utilizadas
 
 - Java 21;
 - Spring Boot 4.0.6;
@@ -98,31 +124,35 @@ Os principais relacionamentos planejados sao:
 - Maven;
 - Git e GitHub.
 
-## Pre-requisitos
+---
 
-Para executar o projeto, e necessario ter instalado:
+## Pré-requisitos
+
+Para executar o projeto, é necessário ter instalado:
 
 - JDK 21;
 - Git.
 
-O Maven nao precisa ser instalado separadamente, pois o projeto inclui o
-Maven Wrapper.
+O Maven não precisa ser instalado separadamente, pois o projeto utiliza o
+**Maven Wrapper**.
 
-## Como executar
+---
 
-1. Clone o repositorio:
+## Como executar o projeto
+
+Clone o repositório:
 
 ```bash
 git clone https://github.com/Ric-ardo28/dscommerce.git
 ```
 
-2. Acesse a pasta do projeto:
+Acesse a pasta do projeto:
 
 ```bash
 cd dscommerce
 ```
 
-3. Execute a aplicacao no Linux ou macOS:
+Execute a aplicação no Linux ou macOS:
 
 ```bash
 ./mvnw spring-boot:run
@@ -134,32 +164,34 @@ No Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-Por padrao, a aplicacao fica disponivel em:
+Por padrão, a aplicação ficará disponível em:
 
 ```text
 http://localhost:8080
 ```
 
-## Banco H2
+---
 
-O perfil ativo e o `test`, configurado para utilizar um banco H2 em memoria.
-Com a aplicacao em execucao, o console pode ser acessado em:
+## Banco de dados H2
+
+O projeto utiliza o perfil `test`, configurado para usar um banco H2 em memória.
+Com a aplicação em execução, o console do H2 pode ser acessado em:
 
 ```text
 http://localhost:8080/h2-console
 ```
 
-Dados de conexao:
+Dados de conexão:
 
 | Campo | Valor |
 | --- | --- |
 | JDBC URL | `jdbc:h2:mem:testdb` |
-| Usuario | `sa` |
-| Senha | vazia |
+| Usuário | `sa` |
+| Senha | deixe em branco |
 
-## Testes
+---
 
-Para executar os testes automatizados:
+## Executando os testes
 
 No Linux ou macOS:
 
@@ -173,7 +205,9 @@ No Windows:
 .\mvnw.cmd test
 ```
 
-## Estrutura atual
+---
+
+## Estrutura atual do projeto
 
 ```text
 src
@@ -181,8 +215,11 @@ src
 |   |-- java/com/ricardodev/dscommerce
 |   |   |-- DscommerceApplication.java
 |   |   `-- entities
+|   |       |-- Category.java
 |   |       |-- Order.java
 |   |       |-- OrderStatus.java
+|   |       |-- Payment.java
+|   |       |-- Product.java
 |   |       `-- User.java
 |   `-- resources
 |       |-- application.properties
@@ -192,14 +229,41 @@ src
         `-- DscommerceApplicationTests.java
 ```
 
-A estrutura sera ampliada conforme o projeto evoluir, com camadas para
-controllers, DTOs, repositories, services e configuracoes.
+A estrutura será ampliada conforme o projeto evoluir, com novas camadas como:
+
+- controllers;
+- services;
+- repositories;
+- DTOs;
+- configurações de segurança;
+- carga inicial de dados.
+
+---
+
+## Próximos passos
+
+Alguns próximos passos previstos para a evolução do projeto:
+
+- finalizar o mapeamento das entidades do domínio;
+- criar a entidade `OrderItem`;
+- criar a entidade `Role`;
+- criar os repositories;
+- popular o banco de dados de teste;
+- criar DTOs para entrada e saída de dados;
+- implementar services e controllers;
+- adicionar validações;
+- implementar tratamento de exceções;
+- implementar autenticação e autorização.
+
+---
 
 ## Objetivo de aprendizado
 
-O principal objetivo e consolidar conhecimentos em desenvolvimento back-end
-com Java e Spring Boot, aplicando conceitos utilizados em sistemas reais e
-evoluindo as funcionalidades ao longo do curso.
+O principal objetivo deste projeto é consolidar conhecimentos em desenvolvimento
+back-end com Java e Spring Boot, aplicando conceitos usados em sistemas reais e
+evoluindo a aplicação de forma gradual conforme o andamento do curso.
+
+---
 
 ## Autor
 
@@ -207,8 +271,12 @@ Desenvolvido por **Ricardo Rodrigues Santana**.
 
 GitHub: [@Ric-ardo28](https://github.com/Ric-ardo28)
 
-## Creditos
+LinkedIn: [Ricardo Rodrigues Santana](https://www.linkedin.com/in/ricardo-rodrigues-santana-741536286/)
+
+---
+
+## Créditos
 
 Projeto baseado no curso da
-**[DevSuperior - Escola de Programacao](https://devsuperior.com.br)**,
-ministrado pelo professor **Nelio Alves**.
+**[DevSuperior - Escola de Programação](https://devsuperior.com.br)**,
+ministrado pelo professor **Nélio Alves**.
