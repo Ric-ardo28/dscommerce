@@ -34,7 +34,7 @@ public class Order {
     private Payment payment;
 
     @OneToMany(mappedBy = "id.order")
-    Set<OrderItem> items = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>();
 
     public List<Product> getProducts() {
         return items.stream().map(x -> x.getProduct()).toList();
