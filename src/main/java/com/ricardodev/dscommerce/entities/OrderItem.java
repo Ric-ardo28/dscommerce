@@ -3,7 +3,9 @@ package com.ricardodev.dscommerce.entities;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem {

@@ -1,9 +1,15 @@
 package com.ricardodev.dscommerce.entities;
-
 import jakarta.persistence.*;
-import org.springframework.aot.generate.GeneratedTypeReference;
+import lombok.*;
 
 import java.time.Instant;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Getter
+@Setter
+
 @Entity
 @Table(name = "tb_payment")
 public class Payment {
