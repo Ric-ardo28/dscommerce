@@ -15,19 +15,19 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping(value = "/{id}")
-    public ProductDTO findById(@PathVariable Long id){
+    public ProductDTO findById(@PathVariable Long id) {
         return service.findById(id);
 
     }
+
     @GetMapping
-    public Page<ProductDTO> findAll(Pageable pageable){
+    public Page<ProductDTO> findAll(Pageable pageable) {
         return service.findAll(pageable);
 
     }
+
     @PostMapping
-    public ProductDTO insert(@RequestBody ProductDTO dto){
-       return service.insert(dto);
-
-
+    public ProductDTO insert(@RequestBody ProductDTO dto) {
+        return service.insert(dto);
     }
 }
