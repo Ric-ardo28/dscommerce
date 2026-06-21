@@ -1,7 +1,6 @@
 package com.ricardodev.dscommerce.dto;
 
 import com.ricardodev.dscommerce.entities.Product;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
