@@ -3,6 +3,7 @@ package com.ricardodev.dscommerce.service;
 import com.ricardodev.dscommerce.dto.ProductDTO;
 import com.ricardodev.dscommerce.entities.Product;
 import com.ricardodev.dscommerce.repositories.ProductRepository;
+import com.ricardodev.dscommerce.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        Product product = repository.findById(id).get();
+        Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado "));
         return new ProductDTO(product);
     }
 
@@ -31,7 +32,7 @@ public class ProductService {
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
-       copyDtoToEntity(dto, entity);
+        copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new ProductDTO(entity);
 
@@ -45,6 +46,12 @@ public class ProductService {
         return new ProductDTO(entity);
 
     }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 
     private void copyDtoToEntity(ProductDTO dto, Product entity) {
         entity.setName(dto.getName());
